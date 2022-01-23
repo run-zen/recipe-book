@@ -1,0 +1,45 @@
+<div *ngIf="recipe_detail">
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="recipeImg">
+                <img [src]="recipe_detail.imagePath" alt="" class="img-fluid">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h1>{{recipe_detail.name ? recipe_detail.name : ''}}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="btn-group">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="manageDropDown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="manageDropDown">
+                    <a class="dropdown-item" href="#">Add to shopping list</a>
+                    <a class="dropdown-item" href="#">Edit Recipe</a>
+                    <a class="dropdown-item" href="#">Delete Recipe</a>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            {{recipe_detail.description}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            Ingredients
+        </div>
+    </div>
+</div>
+<div *ngIf="!recipe_detail">
+    <div class="row mt-5 ">
+        <div class="col-12">
+            <h4>Click On Any Recipe To View Details</h4>
+        </div>
+    </div>
+</div>

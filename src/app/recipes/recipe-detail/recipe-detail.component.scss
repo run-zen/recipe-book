@@ -1,0 +1,11 @@
+.recipeImg {
+    max-height: 400px;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+
+    img {
+        width: 100%;
+    }
+}

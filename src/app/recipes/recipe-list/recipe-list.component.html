@@ -1,0 +1,25 @@
+<div class="row mt-3">
+    <div class="col-xs-12">
+        <button class="btn btn-success">New Recipe</button>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-xs-12">
+        <div *ngFor="let recipe of recipes;let i = index" class="recipe">
+            <a (click)="selectRecipe(recipe, i)" style="cursor: pointer">
+                <div class="recipeList" [ngClass]="{selectedRecipe: recipe.isSelected}">
+                    <div class="">
+                        <h4>{{recipe.name}}</h4>
+                        <p>{{recipe.description}}</p>
+                    </div>
+                    <div class="recipeImg">
+                        <div>
+                            <img class="img-fluid rounded-2" src="{{recipe.imagePath}}" alt="recipe photo"/>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
