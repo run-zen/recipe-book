@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Recipe} from "./recipe.model";
 
 @Component({
@@ -6,17 +6,30 @@ import {Recipe} from "./recipe.model";
     templateUrl: './recipes.component.html',
     styleUrls: ['./recipes.component.scss']
 })
-export class RecipesComponent implements OnInit {
-    selected_recipe?: Recipe;
+export class RecipesComponent implements OnInit, OnDestroy {
+    selected_recipe: Recipe;
+
+    @Input() cachedData:any
+
+    @Output() saveRecipeCache = new EventEmitter<any>()
 
     constructor() {
 
     }
 
     ngOnInit(): void {
+        if (this.cachedData && this.cachedData.selectedRecipe) {
+            this.selected_recipe = this.cachedData.selectedRecipe;
+        }
     }
 
-    setSelectedRecipe(recipe:any) {
+    setSelectedRecipe(recipe: any) {
         this.selected_recipe = recipe
+    }
+
+    ngOnDestroy() {
+        this.saveRecipeCache.emit({
+            selectedRecipe: this.selected_recipe
+        })
     }
 }

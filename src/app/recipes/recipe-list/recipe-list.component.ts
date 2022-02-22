@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Recipe} from "../recipe.model";
 
 @Component({
@@ -11,6 +11,7 @@ export class RecipeListComponent implements OnInit {
     recipes: Recipe[] = [];
 
     @Output() onselectRecipe  = new EventEmitter<any>()
+    @Input() selectedRecipe;
 
     constructor() {
         let newrecipe = new Recipe('Recipe', 'This is the description' , 'https://images.unsplash.com/photo-1602253057119-44d745d9b860?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1026&q=80')
@@ -24,10 +25,21 @@ export class RecipeListComponent implements OnInit {
 
     ngOnInit(): void {
         if(this.recipes.length > 0) {
-            this.onselectRecipe.emit(this.recipes[0])
-            this.recipes[0].isSelected = true
+            if(!this.selectedRecipe) {
+                this.onselectRecipe.emit(this.recipes[0])
+                this.recipes[0].isSelected = true
+            } else {
+                for(let item of this.recipes) {
+                    if(item.name === this.selectedRecipe.name) {
+                        item.isSelected = true
+                    } else {
+                        item.isSelected =false
+                    }
+                }
+            }
         }
     }
+
 
     selectRecipe(recipe:any, i:any) {
         this.onselectRecipe.emit(recipe)

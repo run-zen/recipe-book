@@ -1,9 +1,9 @@
-<app-header></app-header>
+<app-header (headerLinkClicked)="handleHeaderClicked($event)" [selectedTab]="selectedTab"></app-header>
 <div class="container mainWrapper">
     <div class="row">
         <div class="col-md-12">
-            <app-recipes></app-recipes>
-            <app-shopping-list></app-shopping-list>
+            <app-recipes *ngIf="selectedTab === TABS.Recipes" (saveRecipeCache)="onSaveRecipeCache($event)" [cachedData]="recipeCache"></app-recipes>
+            <app-shopping-list *ngIf="selectedTab === TABS.ShoppingList"></app-shopping-list>
         </div>
     </div>
 </div>
